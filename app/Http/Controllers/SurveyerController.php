@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Survey;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class SurveyerController extends Controller
 {
     //
     public function __construct()
     {
-        
+        $this->middleware(['role:user']);
     }
 
     public function index() {
-        echo "User Dashboard";
+        return view("surveyer.index");
     }
 
     public function survey(Request $request) {
@@ -44,7 +45,10 @@ class UserController extends Controller
 
     public function get_survey() {
         // $data_survey = Survey::where('user_id', Auth::id());
-        $data_survey = Survey::where('user_id', 2)->get();
-        dd($data_survey);
+        try {
+            $data_survey = Survey::where('user_id', 2)->get();
+        } catch(Exception $e) {
+
+        }
     }
 }
