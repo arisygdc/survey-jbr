@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\SurveyerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,7 +26,7 @@ Route::prefix('admin')->group(function() {
 });
 
 Route::prefix('surveyer')->group(function() {
-    Route::get('/', [UserController::class, 'index'])->name('surveyer-home');
-    Route::post('/survey', [UserController::class, 'survey'])->name('survey');
-    Route::get('/survey/get', [UserController::class, 'get_survey']);
+    Route::get('/', [SurveyerController::class, 'index'])->name('surveyer-home');
+    Route::post('/survey', [SurveyerController::class, 'survey'])->name('survey');
+    Route::get('/survey/get', [SurveyerController::class, 'get_survey']);
 });
