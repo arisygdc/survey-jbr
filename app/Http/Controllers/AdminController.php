@@ -9,7 +9,7 @@ class AdminController extends Controller
     //
     public function __construct()
     {
-        
+        $this->middleware(['role:admin']);
     }
 
     public function index() {
