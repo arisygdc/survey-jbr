@@ -13,6 +13,6 @@ class AdminController extends Controller
     }
 
     public function index() {
-        echo "Admin Dashboard";
+        return view('admin.index');
     }
 }
