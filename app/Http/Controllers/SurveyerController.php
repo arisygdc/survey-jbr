@@ -43,6 +43,43 @@ class SurveyerController extends Controller
         return redirect()->route('survey')->with('status', 500);
     }
 
+    public function survey_index() {
+        $data = array(
+            'Ambulu',
+            'Ajung',
+            'Arjasa',
+            'Balung',
+            'Bangsalsari',
+            'Gumuk Mas',
+            'Jelbuk',
+            'Jenggawah',
+            'Jombang',
+            'Kalisat',
+            'Kaliwates',
+            'Kencong',
+            'Ledokombo',
+            'Mayang',
+            'Mumbulsari',
+            'Pakusari',
+            'Panti',
+            'Patrang',
+            'Puger',
+            'Rambipuji',
+            'Semboro',
+            'Silo',
+            'Sukorambi',
+            'Sukowono',
+            'Sumber Baru',
+            'Sumberjambe',
+            'Sumbersari',
+            'Tanggul',
+            'Tempurejo',
+            'Umbulsari',
+            'Wuluhan'
+        );
+        return view('surveyer.survey')->with('data', $data);
+    }
+
     public function get_survey() {
         // $data_survey = Survey::where('user_id', Auth::id());
         try {
