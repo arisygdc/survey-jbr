@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="nip" class="col-md-4 col-form-label text-md-right">{{ __('Kecamatan') }}</label>
+                            <label for="kecamatan" class="col-md-4 col-form-label text-md-right">{{ __('Kecamatan') }}</label>
 
                             <div class="col-md-6">
                                 <select class="form-select" aria-label="Default select example">
@@ -21,7 +21,7 @@
                                     <option value="{{ $value }}">{{ $value }}</option>
                                     @endforeach
                                 </select>
-                                @error('nip')
+                                @error('kecamatan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -30,16 +30,17 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Pecahan') }}</label>
+                            <label for="pecahan" class="col-md-4 col-form-label text-md-right">{{ __('Pecahan') }}</label>
 
                             <div class="col-md-6">
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>----</option>
-                                    @foreach ($data as $value)
-                                    <option value="{{ $value }}">{{ $value }}</option>
-                                    @endforeach
+                                    <option value="10000">10000</option>
+                                    <option value="20000">20000</option>
+                                    <option value="50000">50000</option>
+                                    <option value="100000">100000</option>
                                 </select>
-                                @error('name')
+                                @error('pecahan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -48,12 +49,17 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="qlt" class="col-md-4 col-form-label text-md-right">{{ __('Kualitas') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>----</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                                @error('qlt')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
