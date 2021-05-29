@@ -22,11 +22,12 @@ Auth::routes();
 Route::prefix('admin')->group(function() {
     Route::get('/', [AdminController::class, 'index'])->name('admin-home');
     Route::get('/users', [AdminController::class, 'users_index']);
-    // Route::post('/users', [AdminController::class, 'register']);
 });
 
 Route::prefix('surveyer')->group(function() {
     Route::get('/', [SurveyerController::class, 'index'])->name('surveyer-home');
-    Route::post('/survey', [SurveyerController::class, 'survey'])->name('survey');
+    Route::get('/survey', [SurveyerController::class, 'survey_index'])->name('survey');
     Route::get('/survey/get', [SurveyerController::class, 'get_survey']);
+
+    Route::post('/survey', [SurveyerController::class, 'survey']);
 });
