@@ -18,8 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
-
+});
 Auth::routes();
 Route::prefix('admin')->group(function() {
     Route::get('/', [AdminController::class, 'index'])->name('admin-home');
