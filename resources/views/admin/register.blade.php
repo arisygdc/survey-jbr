@@ -6,9 +6,13 @@
         <div class="col-md-8">
         @isset($status)
             @if($status == 200)
-                {{ __('Success' )}}
+            <div class="alert alert-success" role="alert">
+                Register sukses
+            </div>
             @else
-                {{ __('Failed' )}}
+            <div class="alert alert-danger" role="alert">
+                Register gagal
+            </div>
             @endif
         @endisset
             <div class="card">
