@@ -19,7 +19,7 @@
                 <div class="card-header">{{ __('Survey') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post.survey') }}">
+                    <form method="POST" action="{{ route('store.survey') }}">
                         @csrf
 
                         <div class="form-group row">

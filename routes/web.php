@@ -32,5 +32,5 @@ Route::prefix('surveyer')->group(function() {
     Route::get('/survey', [SurveyerController::class, 'survey_index'])->name('survey');
     Route::get('/survey/get', [SurveyerController::class, 'get_survey']);
 
-    Route::post('/survey', [SurveyerController::class, 'survey'])->name('post.survey');
+    Route::post('/survey', [SurveyerController::class, 'survey'])->name('store.survey');
 });
