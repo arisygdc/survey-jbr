@@ -30,7 +30,6 @@ Route::prefix('admin')->group(function() {
 Route::prefix('surveyer')->group(function() {
     Route::get('/', [SurveyerController::class, 'index'])->name('surveyer-home');
     Route::get('/survey', [SurveyerController::class, 'survey_index'])->name('survey');
-    Route::get('/survey/get', [SurveyerController::class, 'get_survey']);
 
     Route::post('/survey', [SurveyerController::class, 'survey'])->name('store.survey');
 });

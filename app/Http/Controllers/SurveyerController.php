@@ -61,13 +61,4 @@ class SurveyerController extends Controller
         
         return view('surveyer.survey');
     }
-
-    public function get_survey() {
-        // $data_survey = Survey::where('user_id', Auth::id());
-        try {
-            $data_survey = Survey::where('user_id', 2)->get();
-        } catch(Exception $e) {
-
-        }
-    }
 }
