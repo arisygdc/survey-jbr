@@ -21,7 +21,10 @@ Route::get('/', function () {
 Auth::routes();
 Route::prefix('admin')->group(function() {
     Route::get('/', [AdminController::class, 'index'])->name('admin-home');
-    Route::get('/users', [AdminController::class, 'users_index']);
+    Route::get('/users', [AdminController::class, 'users_index'])->name('get.users');
+    Route::get('/users/register', [AdminController::class, 'store_index'])->name('get.register');
+
+    Route::post('/users/register', [AdminController::class, 'store'])->name('store.users');
 });
 
 Route::prefix('surveyer')->group(function() {
@@ -29,5 +32,5 @@ Route::prefix('surveyer')->group(function() {
     Route::get('/survey', [SurveyerController::class, 'survey_index'])->name('survey');
     Route::get('/survey/get', [SurveyerController::class, 'get_survey']);
 
-    Route::post('/survey', [SurveyerController::class, 'survey']);
+    Route::post('/survey', [SurveyerController::class, 'survey'])->name('post.survey');
 });
