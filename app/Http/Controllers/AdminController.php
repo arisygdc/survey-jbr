@@ -38,7 +38,7 @@ class AdminController extends Controller
             'email' => $request['email'],
             'password' => $request['password'],
         ];
-        $status = 200;
+        $status = 500;
         if ($this->validateUser($data)) {
             $status = $this->createUser($data);
         }
