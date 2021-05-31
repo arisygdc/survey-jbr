@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -24,5 +27,49 @@ class AdminController extends Controller
 
     public function store_index() {
         return view('admin.register');
+    }
+
+    public function store(Request $request) {
+        $data = [
+            'nip' => $request['nip'],
+            'name' => $request['name'],
+            'alamat' => $request['alamat'],
+            'tgl_lahir' => $request['tgl_lahir'],
+            'email' => $request['email'],
+            'password' => $request['password'],
+        ];
+        $status = 200;
+        if ($this->validateUser($data)) {
+            $status = $this->createUser($data);
+        }
+        return view('admin.register')->with('status', $status);
+    }
+
+    protected function validateUser($data) {
+        return Validator::make($data, [
+            'nip' => ['required', 'integer'],
+            'name' => ['required', 'string', 'max:255'],
+            'alamat' => ['required', 'string', 'max:255'],
+            'tgl_lahir' => ['required', 'date'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
+    protected function createUser($data) {
+        try {
+            $user = User::create([
+                'nip' => $data['nip'],
+                'name' => $data['name'],
+                'alamat' => $data['alamat'],
+                'tgl_lahir' => $data['tgl_lahir'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+            $user->assignRole('user');
+        } catch(Exception $e) {
+            return 500;
+        }
+        return 200;
     }
 }
