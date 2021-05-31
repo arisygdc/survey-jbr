@@ -20,7 +20,7 @@ class SurveySeeder extends Seeder
             'kecamatan' => 'ajung',
             'pecahan' => 100000,
             'qlt' => 3,
-            'foto'=> bcrypt('image385934gegse')
+            // 'foto'=> bcrypt('image385934gegse')
         ]);
     }
 }

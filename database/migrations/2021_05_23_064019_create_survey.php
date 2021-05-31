@@ -19,7 +19,6 @@ class CreateSurvey extends Migration
             $table->string('kecamatan');
             $table->integer('pecahan');
             $table->integer('qlt');
-            $table->string('foto');
             $table->timestamps();
         });
     }

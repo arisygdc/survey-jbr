@@ -6,6 +6,7 @@ use App\Models\Survey;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class SurveyerController extends Controller
 {
@@ -20,64 +21,45 @@ class SurveyerController extends Controller
     }
 
     public function survey(Request $request) {
-        $validatedData = $request->validate([
+        $data = [
+            'user_id' => Auth::user()->id,
+            'kecamatan' => $request['kecamatan'],
+            'pecahan' => $request['pecahan'],
+            'qlt' => $request['qlt'],
+        ];
+        $status = 500;
+        if ($this->validationSurvey($data)) {
+            $status = $this->createSurvey($data);
+        }
+        return view('surveyer.survey')->with('status', $status);
+    }
+
+    protected function validationSurvey($data) {
+        return Validator::make($data, [
             'user_id' => ['required', 'integer'],
             'kecamatan' => ['required', 'string', 'max:50'],
             'pecahan' => ['required', 'integer'],
-            'qlt' => ['required', 'integer', 'max:1'],
-            'foto' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'qlt' => ['required', 'integer', 'max:1']
         ]);
-        $nama_foto = bcrypt($request->file('foto')->getClientOriginalName());
-        $request->file('foto')->store('public/images');
-    
-        $survey = new Survey();
-        $survey->user_id = Auth::id();
-        $survey->kecamatan = $request->kecamatan;
-        $survey->pecahan = $request->pecahan;
-        $survey->qlt = $request->qlt;
-        $survey->foto = $nama_foto;
+    }
 
-        if ($survey->save()) {
-            return redirect()->route('survey')->with('status', 201);
+    protected function createSurvey($data) {
+        try {
+            Survey::create([
+                'user_id' => $data['user_id'],
+                'kecamatan' => $data['kecamatan'],
+                'pecahan' => $data['pecahan'],
+                'qlt' => $data['qlt'],
+            ]);
+        } catch(Exception $e) {
+            return 500;
         }
-        return redirect()->route('survey')->with('status', 500);
+        return 200;
     }
 
     public function survey_index() {
-        $data = array(
-            'Ambulu',
-            'Ajung',
-            'Arjasa',
-            'Balung',
-            'Bangsalsari',
-            'Gumuk Mas',
-            'Jelbuk',
-            'Jenggawah',
-            'Jombang',
-            'Kalisat',
-            'Kaliwates',
-            'Kencong',
-            'Ledokombo',
-            'Mayang',
-            'Mumbulsari',
-            'Pakusari',
-            'Panti',
-            'Patrang',
-            'Puger',
-            'Rambipuji',
-            'Semboro',
-            'Silo',
-            'Sukorambi',
-            'Sukowono',
-            'Sumber Baru',
-            'Sumberjambe',
-            'Sumbersari',
-            'Tanggul',
-            'Tempurejo',
-            'Umbulsari',
-            'Wuluhan'
-        );
-        return view('surveyer.survey')->with('data', $data);
+        
+        return view('surveyer.survey');
     }
 
     public function get_survey() {

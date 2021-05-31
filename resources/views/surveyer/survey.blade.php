@@ -1,15 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+@php 
+    $data = [
+        'Ambulu', 'Ajung', 'Arjasa', 'Balung', 'Bangsalsari', 'Gumuk Mas', 'Jelbuk', 'Jenggawah', 'Jombang', 'Kalisat', 'Kaliwates', 'Kencong', 'Ledokombo',
+        'Mayang', 'Mumbulsari', 'Pakusari', 'Panti', 'Patrang', 'Puger', 'Rambipuji', 'Semboro', 'Silo', 'Sukorambi', 'Sukowono', 'Sumber Baru',
+        'Sumberjambe', 'Sumbersari', 'Tanggul', 'Tempurejo', 'Umbulsari', 'Wuluhan'
+    ];
+@endphp
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             @isset($status)
-            @if($status <= 300)
+            @if($status == 200)
             <div class="alert alert-success" role="alert">
                 Survey success
             </div>
-            @elseif($status <= 600)
+            @elseif($status == 500)
             <div class="alert alert-danger" role="alert">
                 Survey gagal
             </div>
@@ -26,7 +33,7 @@
                             <label for="kecamatan" class="col-md-4 col-form-label text-md-right">{{ __('Kecamatan') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" aria-label="Default select example" name="kecamatan">
                                     <option selected>--------------</option>
                                     @foreach ($data as $value)
                                     <option value="{{ $value }}">{{ $value }}</option>
@@ -44,7 +51,7 @@
                             <label for="pecahan" class="col-md-4 col-form-label text-md-right">{{ __('Pecahan') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" aria-label="Default select example" name="pecahan">
                                     <option selected>-------</option>
                                     <option value="10000">10000</option>
                                     <option value="20000">20000</option>
@@ -63,7 +70,7 @@
                             <label for="qlt" class="col-md-4 col-form-label text-md-right">{{ __('Kualitas') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" aria-label="Default select example" name="qlt">
                                     <option selected>----</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
