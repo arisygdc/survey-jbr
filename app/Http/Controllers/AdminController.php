@@ -21,4 +21,8 @@ class AdminController extends Controller
         $data_user = User::select('nip', 'name', 'alamat', 'email')->get();
         return view('admin.users_index')->with('data_user', $data_user);
     }
+
+    public function store_index() {
+        return view('admin.register');
+    }
 }
