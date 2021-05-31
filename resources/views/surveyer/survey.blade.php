@@ -27,7 +27,7 @@
 
                             <div class="col-md-6">
                                 <select class="form-select" aria-label="Default select example">
-                                    <option selected>----</option>
+                                    <option selected>--------------</option>
                                     @foreach ($data as $value)
                                     <option value="{{ $value }}">{{ $value }}</option>
                                     @endforeach
@@ -45,7 +45,7 @@
 
                             <div class="col-md-6">
                                 <select class="form-select" aria-label="Default select example">
-                                    <option selected>----</option>
+                                    <option selected>-------</option>
                                     <option value="10000">10000</option>
                                     <option value="20000">20000</option>
                                     <option value="50000">50000</option>
