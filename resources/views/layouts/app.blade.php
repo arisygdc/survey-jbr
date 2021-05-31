@@ -49,7 +49,7 @@
                         @else
                             @role('admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('store.user') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('get.register') }}">{{ __('Register') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('get.users') }}">{{ __('Users') }}</a>
