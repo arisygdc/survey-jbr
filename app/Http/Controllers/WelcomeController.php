@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Survey;
-use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
     public function index() {
         $pecahan = [
-            10000, 20000, 50000, 100000
+            1, 2, 3, 4
         ];
-        $i = 100000;
+        $i = 4;
         if(isset($q)) {
             foreach ($pecahan as $value) {
                 if ($q == $value) {
@@ -19,15 +18,15 @@ class WelcomeController extends Controller
                 }
             }
         }
-        $survey = $this->get_survey($i);
-        return view('welcome')->with('survey', $survey);
+        $table = $this->count_survey($i);
+        return view('welcome')->with('table', $table);
     }
 
-    protected function get_survey($q) {
-        return Survey::select(
-            'kecamatan',
-            'pecahan',
-            'qlt'
-        )->where('pecahan', $q)->get();
+    protected function count_survey($q) {
+        return Survey::selectRaw('kecamatan, count(kecamatan_id) as disurvey, avg(qlt) as kualitas')
+                        ->leftJoin('kecamatan', 'kecamatan_id', '=', 'kecamatan.id')
+                        ->where('pecahan_id', $q)
+                        ->groupBy('kecamatan_id')
+                        ->get();
     }
 }
