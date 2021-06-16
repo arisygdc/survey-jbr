@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class SurveyerController extends Controller
@@ -40,7 +41,8 @@ class SurveyerController extends Controller
         if ($this->validationSurvey($data)) {
             $status = $this->createSurvey($data);
         }
-        return Redirect::back()->with(['status' => $status]);
+        Session::flash('status', $status);
+        return Redirect::back();
     }
 
     protected function get_kecamatan() {

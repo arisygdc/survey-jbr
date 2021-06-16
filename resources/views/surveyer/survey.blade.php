@@ -4,17 +4,17 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @isset($status)
-            @if($status == 200)
+            @if(Session::has('status'))
+            @if(Session::get('status') == 200)
             <div class="alert alert-success" role="alert">
                 Survey success
             </div>
-            @elseif($status == 500)
+            @elseif(Session::get('status') == 500)
             <div class="alert alert-danger" role="alert">
                 Survey gagal
             </div>
             @endif
-            @endisset
+            @endif
             <div class="card">
                 <div class="card-header">{{ __('Survey') }}</div>
 
