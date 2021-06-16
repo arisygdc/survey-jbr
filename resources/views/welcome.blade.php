@@ -72,32 +72,24 @@
   <div class="container px-lg-5">
     <div class="row mx-lg-n5">
       <div class="col py-3 px-lg-5 border bg-light">
-        <table class="table table-hover ">
+        <table class="table table-hover" id="table">
           <thead>
             <tr>
               <th class="bg-success text-white" scope="col">No</th>
-              <th class="bg-success text-white" scope="col">First</th>
-              <th class="bg-success text-white" scope="col">Last</th>
-              <th class="bg-success text-white" scope="col">Handle</th>
+              <th class="bg-success text-white" scope="col">Kecamatan</th>
+              <th class="bg-success text-white" scope="col">Survey</th>
+              <th class="bg-success text-white" scope="col">Kualitas</th>
             </tr>
           </thead>
           <tbody>
+          @foreach($table as $val)
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+              <th scope="row">{{ $loop->iteration }}</th>
+              <td>{{ $val->kecamatan }}</td>
+              <td>{{ $val->disurvey }}</td>
+              <td>{{ $val->kualitas }}</td>
             </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
+          @endforeach
             </tr>
           </tbody>
         </table>
@@ -128,34 +120,42 @@
     }
     return color;
   }
-  console.log(getRandomColor());
+
+  let data_table = []
+  let table = document.getElementById('table');
+  console.log()
+  for(let i = 1; i < table.rows.length; i++){
+    var nested = table.rows[i];
+    data_table.push([
+      nested.cells.item(1).innerHTML.toUpperCase(),
+      nested.cells.item(3).innerHTML
+    ]);
+  }
 
   axios.get("{{ asset('assets/kecamatan.json') }}")
     .then(r => {
       let geojsonFeature = r.data
-
-      console.log(geojsonFeature);
-
       L.geoJSON(geojsonFeature, {
         style: function(feature) {
-          let data_kecamatan = feature.properties.kecamatan;
-          // switch (data_kecamatan) {
-          //     case 'KENCONG': return { color: "#ff0000" };
-          //     case 'Democrat': return { color: "#0000ff" };
-          // }
-          // for (let i in data_kecamatan) {
-          //    if (i) {
-               
-          //    } 
-          // }
-          return {
-            
-            fillColor: getRandomColor(),
-            color: getRandomColor(),
-            opacity: 1,
-            fillOpacity: 1
+          let data_geo = feature.properties.kecamatan;
+          for(let i = 0; i <= (data_table.length-1); i++) {
+            if((data_geo == data_table[i][0])) {
+              let pic_color = '#f4f4e8';
+              if(data_table[i][1] <= 2) {
+                pic_color = '#dd2c1c';
+              } else if(data_table[i][1] <= 3) {
+                pic_color = '#e8e812';
+              } else if(data_table[i][1] <= 4) {
+                pic_color = '#31ce0e'
+              }
+              return { 
+                fillColor: pic_color,
+                color: '#40d3d6' ,
+                opacity: 1,
+                fillOpacity: 1
+              }
+            }
           }
-
         }
       }).addTo(map);
     })
