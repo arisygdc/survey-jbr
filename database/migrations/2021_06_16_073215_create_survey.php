@@ -15,11 +15,14 @@ class CreateSurvey extends Migration
     {
         Schema::create('survey', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->string('kecamatan');
-            $table->integer('pecahan');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('id_kecamatan');
+            $table->unsignedBigInteger('id_pecahan');
             $table->integer('qlt');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('id_pecahan')->references('id')->on('pecahan');
+            $table->foreign('id_kecamatan')->references('id')->on('kecamatan');
         });
     }
 
