@@ -1,13 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-@php 
-    $data = [
-        'Ambulu', 'Ajung', 'Arjasa', 'Balung', 'Bangsalsari', 'Gumuk Mas', 'Jelbuk', 'Jenggawah', 'Jombang', 'Kalisat', 'Kaliwates', 'Kencong', 'Ledokombo',
-        'Mayang', 'Mumbulsari', 'Pakusari', 'Panti', 'Patrang', 'Puger', 'Rambipuji', 'Semboro', 'Silo', 'Sukorambi', 'Sukowono', 'Sumber Baru',
-        'Sumberjambe', 'Sumbersari', 'Tanggul', 'Tempurejo', 'Umbulsari', 'Wuluhan'
-    ];
-@endphp
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -35,8 +28,8 @@
                             <div class="col-md-6">
                                 <select class="form-select" aria-label="Default select example" name="kecamatan">
                                     <option selected>--------------</option>
-                                    @foreach ($data as $value)
-                                    <option value="{{ $value }}">{{ $value }}</option>
+                                    @foreach($kecamatan as $value)
+                                    <option value="{{ $value->id }}">{{ $value->kecamatan }}</option>
                                     @endforeach
                                 </select>
                                 @error('kecamatan')
@@ -53,10 +46,9 @@
                             <div class="col-md-6">
                                 <select class="form-select" aria-label="Default select example" name="pecahan">
                                     <option selected>-------</option>
-                                    <option value="10000">10000</option>
-                                    <option value="20000">20000</option>
-                                    <option value="50000">50000</option>
-                                    <option value="100000">100000</option>
+                                    @foreach($pecahan as $value)
+                                    <option value="{{ $value->id }}">{{ $value->pecahan }}</option>
+                                    @endforeach
                                 </select>
                                 @error('pecahan')
                                 <span class="invalid-feedback" role="alert">

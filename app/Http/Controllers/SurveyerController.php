@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kecamatan;
+use App\Models\Pecahan;
 use App\Models\Survey;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,6 +22,12 @@ class SurveyerController extends Controller
         return view("surveyer.index");
     }
 
+    public function survey_index() {
+        $kecamatan = $this->get_kecamatan();
+        $pecahan = $this->get_pecahan();
+        return view('surveyer.survey')->with(['kecamatan' => $kecamatan, 'pecahan' => $pecahan]);
+    }
+
     public function survey(Request $request) {
         $data = [
             'user_id' => Auth::user()->id,
@@ -32,6 +40,14 @@ class SurveyerController extends Controller
             $status = $this->createSurvey($data);
         }
         return view('surveyer.survey')->with('status', $status);
+    }
+
+    protected function get_kecamatan() {
+        return Kecamatan::select('id', 'kecamatan')->get();
+    }
+
+    protected function get_pecahan() {
+        return Pecahan::select('id', 'pecahan')->get();
     }
 
     protected function validationSurvey($data) {
@@ -47,18 +63,13 @@ class SurveyerController extends Controller
         try {
             Survey::create([
                 'user_id' => $data['user_id'],
-                'kecamatan' => $data['kecamatan'],
-                'pecahan' => $data['pecahan'],
+                'kecamatan' => $data['kecamatan_id'],
+                'pecahan' => $data['pecahan_id'],
                 'qlt' => $data['qlt'],
             ]);
         } catch(Exception $e) {
             return 500;
         }
         return 200;
-    }
-
-    public function survey_index() {
-        
-        return view('surveyer.survey');
     }
 }
