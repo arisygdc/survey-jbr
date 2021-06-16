@@ -132,6 +132,13 @@
     ]);
   }
 
+  function getColor(d) {
+    return d <= 2 ? '#dd2c1c' :
+           d <= 3  ? '#e8e812' :
+           d <= 4  ? '#31ce0e' :
+                      '#f4f4e8';
+  }
+
   axios.get("{{ asset('assets/kecamatan.json') }}")
     .then(r => {
       let geojsonFeature = r.data
@@ -140,16 +147,8 @@
           let data_geo = feature.properties.kecamatan;
           for(let i = 0; i <= (data_table.length-1); i++) {
             if((data_geo == data_table[i][0])) {
-              let pic_color = '#f4f4e8';
-              if(data_table[i][1] <= 2) {
-                pic_color = '#dd2c1c';
-              } else if(data_table[i][1] <= 3) {
-                pic_color = '#e8e812';
-              } else if(data_table[i][1] <= 4) {
-                pic_color = '#31ce0e'
-              }
               return { 
-                fillColor: pic_color,
+                fillColor: getColor(data_table[i][1]),
                 color: '#40d3d6' ,
                 opacity: 1,
                 fillOpacity: 1
