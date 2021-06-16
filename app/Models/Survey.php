@@ -12,18 +12,22 @@ class Survey extends Model
 
     protected $fillable = [
         'user_id',
-        'kecamatan',
-        'pecahan',
+        'kecamatan_id',
+        'pecahan_id',
         'qlt',
         'foto',
         'tgl_survey'
     ];
 
     public function user(){
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function kecamatan(){
-        return $this->belongsTo(Kecamatan::class, 'user_id');
+        return $this->belongsTo(Kecamatan::class, 'kecamatan_id', 'id');
+    }
+
+    public function pecahan(){
+        return $this->belongsTo(Kecamatan::class, 'pecahan_id', 'id');
     }
 }

@@ -15,6 +15,6 @@ class Kecamatan extends Model
     ];
 
     public function survey(){
-        return $this->hasMany(Survey::class );
+        return $this->hasMany(Survey::class, 'kecamatan_id', 'id');
     }
 }
