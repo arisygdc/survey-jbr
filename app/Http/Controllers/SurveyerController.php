@@ -37,8 +37,8 @@ class SurveyerController extends Controller
     protected function validationSurvey($data) {
         return Validator::make($data, [
             'user_id' => ['required', 'integer'],
-            'kecamatan' => ['required', 'string', 'max:50'],
-            'pecahan' => ['required', 'integer'],
+            'kecamatan' => ['required', 'integer', 'max:2'],
+            'pecahan' => ['required', 'integer', 'max:10'],
             'qlt' => ['required', 'integer', 'max:1']
         ]);
     }
