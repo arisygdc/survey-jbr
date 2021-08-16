@@ -64,7 +64,6 @@
 
       <div id="map"></div>
       <br>
-      <p>konten ini mengandung kekerasan dan tindak asusila.</p>
       <a class="btn btn-primary btn-lg" href="#" role="button">pelajari</a>
     </div>
   </div>
