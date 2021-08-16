@@ -27,7 +27,7 @@ class SurveySeeder extends Seeder
                 'user_id' => rand(2,$user_id),
                 'kecamatan_id' => rand(1, $kecamatan),
                 'pecahan_id' => rand(1, $pecahan),
-                'qlt' => rand(1,4),
+                'qlt' => rand(1,16),
             ]);
         }
     }
