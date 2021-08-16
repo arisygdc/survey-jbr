@@ -58,7 +58,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownData">
                                     <a class="dropdown-item" href="{{ route('get.users') }}">{{ __('Users') }}</a>
-                                    <a class="dropdown-item" href="#">{{ __('Survey') }}</a>
+                                    <a class="dropdown-item" href="{{ route('get.survey') }}">{{ __('Survey') }}</a>
                                 </div>
                                 </div>
                             </li>
