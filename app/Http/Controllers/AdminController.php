@@ -31,8 +31,8 @@ class AdminController extends Controller
             ->leftJoin('kecamatan', 'kecamatan.id', '=', 'survey.kecamatan_id')
             ->select('users.name', 'kecamatan.kecamatan', 'survey.qlt')
             ->simplePaginate(40);
-        $page = $request->input('page')-1;
-        $no = ($page >= 1) ? $page*40 : 1;
+        $page = $request->input('page');
+        $no = (($page-1) *40) +1;
         return view('admin.survey_index')->with(['data_survey' => $data_survey, 'no' => $no]);
     }
 
