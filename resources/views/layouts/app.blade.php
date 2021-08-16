@@ -52,7 +52,15 @@
                                 <a class="nav-link" href="{{ route('get.register') }}">{{ __('Register') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('get.users') }}">{{ __('Users') }}</a>
+                            <div class="dropdown">
+                                <a class="nav-link dropdown-toggle" type="button" id="dropdownData" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ __('Data') }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownData">
+                                    <a class="dropdown-item" href="{{ route('get.users') }}">{{ __('Users') }}</a>
+                                    <a class="dropdown-item" href="#">{{ __('Survey') }}</a>
+                                </div>
+                                </div>
                             </li>
                             @else
                             <li class="nav-item">
