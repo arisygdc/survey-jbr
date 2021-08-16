@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [WelcomeController::class, 'index']);
-Auth::routes();
+Auth::routes(['register' => false]);
 Route::prefix('admin')->group(function() {
     Route::get('/', [AdminController::class, 'index'])->name('admin-home');
     Route::get('/survey', [AdminController::class, 'survey_index'])->name('get.survey');
