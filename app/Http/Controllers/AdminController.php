@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Survey;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -23,6 +24,16 @@ class AdminController extends Controller
     public function users_index() {
         $data_user = User::select('name', 'alamat', 'email')->get();
         return view('admin.users_index')->with('data_user', $data_user);
+    }
+
+    public function survey_index(Request $request) {
+        $data_survey = Survey::leftJoin('users', 'users.id', '=', 'survey.user_id')
+            ->leftJoin('kecamatan', 'kecamatan.id', '=', 'survey.kecamatan_id')
+            ->select('users.name', 'kecamatan.kecamatan', 'survey.qlt')
+            ->simplePaginate(40);
+        $page = $request->input('page')-1;
+        $no = ($page >= 1) ? $page*40 : 1;
+        return view('admin.survey_index')->with(['data_survey' => $data_survey, 'no' => $no]);
     }
 
     public function store_index() {
