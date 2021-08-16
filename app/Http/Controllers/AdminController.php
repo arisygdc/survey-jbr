@@ -21,7 +21,7 @@ class AdminController extends Controller
     }
 
     public function users_index() {
-        $data_user = User::select('nip', 'name', 'alamat', 'email')->get();
+        $data_user = User::select('name', 'alamat', 'email')->get();
         return view('admin.users_index')->with('data_user', $data_user);
     }
 
@@ -31,7 +31,6 @@ class AdminController extends Controller
 
     public function store(Request $request) {
         $data = [
-            'nip' => $request['nip'],
             'name' => $request['name'],
             'alamat' => $request['alamat'],
             'tgl_lahir' => $request['tgl_lahir'],
@@ -47,7 +46,6 @@ class AdminController extends Controller
 
     protected function validateUser($data) {
         return Validator::make($data, [
-            'nip' => ['required', 'integer'],
             'name' => ['required', 'string', 'max:255'],
             'alamat' => ['required', 'string', 'max:255'],
             'tgl_lahir' => ['required', 'date'],
@@ -59,7 +57,6 @@ class AdminController extends Controller
     protected function createUser($data) {
         try {
             $user = User::create([
-                'nip' => $data['nip'],
                 'name' => $data['name'],
                 'alamat' => $data['alamat'],
                 'tgl_lahir' => $data['tgl_lahir'],
