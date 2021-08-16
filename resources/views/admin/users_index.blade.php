@@ -11,7 +11,6 @@
                     <table class="table table-striped">
                     <th>
                         <td>NO</td>
-                        <td>NIP</td>
                         <td>Nama</td>
                         <td>Alamat</td>
                         <td>Email</td>
@@ -23,7 +22,6 @@
                     <tr>
                         <td></td>
                         <td>{{ $no++ }}</td>
-                        <td>{{ $value->nip }}</td>
                         <td>{{ $value->name }}</td>
                         <td>{{ $value->alamat }}</td>
                         <td>{{ $value->email }}</td>
