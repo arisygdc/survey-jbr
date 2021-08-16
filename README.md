@@ -28,6 +28,12 @@ Clone this project
 git clone https://github.com/arisygdc/survey-jbr.git
 ```
 
+Install dependency using composer and npm
+```
+composer install
+npm install
+```
+
 migrate with pre installed data
 ```
 php artisan migrate --seed
