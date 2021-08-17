@@ -58,7 +58,7 @@ class SurveyerController extends Controller
             'user_id' => ['required', 'integer'],
             'kecamatan_id' => ['required', 'integer', 'max:2'],
             'pecahan_id' => ['required', 'integer', 'max:10'],
-            'qlt' => ['required', 'integer', 'max:1']
+            'qlt' => ['required', 'integer', 'between:1,16']
         ]);
     }
 
