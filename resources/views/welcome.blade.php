@@ -132,9 +132,9 @@
   }
 
   function getColor(d) {
-    return d <= 2 ? '#dd2c1c' :
-           d <= 3  ? '#e8e812' :
-           d <= 4  ? '#31ce0e' :
+    return d <= 6 ? '#dd2c1c' :
+           d <= 8  ? '#e8e812' :
+           d <= 16  ? '#31ce0e' :
                       '#f4f4e8';
   }
 
@@ -153,6 +153,12 @@
                 fillOpacity: 1
               }
             }
+          }
+          return { 
+            fillColor: '#4f6470',
+            color: '#40d3d6' ,
+            opacity: 1,
+            fillOpacity: 1
           }
         }
       }).addTo(map);
