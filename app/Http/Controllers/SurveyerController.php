@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class SurveyerController extends Controller
 {
@@ -30,21 +31,6 @@ class SurveyerController extends Controller
         return view('surveyer.survey')->with(['kecamatan' => $kecamatan, 'pecahan' => $pecahan]);
     }
 
-    public function survey(Request $request) {
-        $data = [
-            'user_id' => Auth::user()->id,
-            'kecamatan' => $request['kecamatan'],
-            'pecahan' => $request['pecahan'],
-            'qlt' => $request['qlt'],
-        ];
-        $status = 500;
-        if ($this->validationSurvey($data)) {
-            $status = $this->createSurvey($data);
-        }
-        Session::flash('status', $status);
-        return Redirect::back();
-    }
-
     protected function get_kecamatan() {
         return Kecamatan::select('id', 'kecamatan')->get();
     }
@@ -53,12 +39,27 @@ class SurveyerController extends Controller
         return Pecahan::select('id', 'pecahan')->get();
     }
 
+    public function survey(Request $request) {
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+        $imageName = Str::random(15) . time().'.'.request()->foto->getClientOriginalExtension();
+        $status = 500;
+        if ($this->validationSurvey($data)) {
+            $data['foto'] = $imageName;
+            $status = $this->createSurvey($data);
+            request()->foto->move(public_path('images'), $imageName);
+        }
+        Session::flash('status', $status);
+        return Redirect::back();
+    }
+
     protected function validationSurvey($data) {
-        return Validator::make($data, [
-            'user_id' => ['required', 'integer'],
-            'kecamatan_id' => ['required', 'integer', 'max:2'],
-            'pecahan_id' => ['required', 'integer', 'max:10'],
-            'qlt' => ['required', 'integer', 'between:1,16']
+        return Validator::make($data, $rules = [
+            'user_id' => 'Required|Numeric',
+            'kecamatan' => 'Required|Numeric|max:2',
+            'pecahan' => 'Required|Numeric|max:10',
+            'qlt' => 'Required|Numeric|between:1,16',
+            'foto' => ['required', 'image', 'mimes:jpeg,png,jpg', 'max:1014'],
         ]);
     }
 
@@ -69,6 +70,7 @@ class SurveyerController extends Controller
                 'kecamatan_id' => $data['kecamatan'],
                 'pecahan_id' => $data['pecahan'],
                 'qlt' => $data['qlt'],
+                'foto' => $data['foto']
             ]);
         } catch(Exception $e) {
             return 500;

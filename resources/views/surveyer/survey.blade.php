@@ -19,7 +19,7 @@
                 <div class="card-header">{{ __('Survey') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('store.survey') }}">
+                    <form method="POST" action="{{ route('store.survey') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -69,6 +69,19 @@
                                     @endfor
                                 </select>
                                 @error('qlt')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="qlt" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
+
+                            <div class="col-md-6">
+                                <input class="form-control form-control-sm" id="formFileSm" type="file" name="foto">
+                                @error('foto')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
