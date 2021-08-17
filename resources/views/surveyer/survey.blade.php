@@ -64,10 +64,9 @@
                             <div class="col-md-6">
                                 <select class="form-select" aria-label="Default select example" name="qlt">
                                     <option selected>----</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
+                                    @for($i = 1; $i <=16; $i++)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
                                 </select>
                                 @error('qlt')
                                 <span class="invalid-feedback" role="alert">
