@@ -19,6 +19,7 @@ class CreateSurvey extends Migration
             $table->unsignedBigInteger('kecamatan_id');
             $table->unsignedBigInteger('pecahan_id');
             $table->integer('qlt');
+            $table->string('foto');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('pecahan_id')->references('id')->on('pecahan');
