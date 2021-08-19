@@ -42,12 +42,14 @@ class SurveyerController extends Controller
     public function survey(Request $request) {
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
-        $imageName = Str::random(15) . time().'.'.request()->foto->getClientOriginalExtension();
         $status = 500;
         if ($this->validationSurvey($data)) {
-            $data['foto'] = $imageName;
-            $status = $this->createSurvey($data);
-            request()->foto->move(public_path('images'), $imageName);
+            if (request()->hasFile('foto')) {
+                $imageName = Str::random(15) . time().'.'.request()->foto->getClientOriginalExtension();
+                $data['foto'] = $imageName;
+                $status = $this->createSurvey($data);
+                request()->foto->move(public_path('images'), $imageName);
+            }
         }
         Session::flash('status', $status);
         return Redirect::back();
