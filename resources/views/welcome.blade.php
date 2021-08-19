@@ -64,7 +64,10 @@
 
       <div id="map"></div>
       <br>
-      <a class="btn btn-primary btn-lg" href="#" role="button">pelajari</a>
+      <a class="btn btn-primary btn-lg" href="?pecahan=1000" role="button">1000</a>
+      <a class="btn btn-primary btn-lg" href="?pecahan=2000" role="button">2000</a>
+      <a class="btn btn-primary btn-lg" href="?pecahan=5000" role="button">5000</a>
+      <a class="btn btn-primary btn-lg" href="?pecahan=10000" role="button">10000</a>
     </div>
   </div>
 
