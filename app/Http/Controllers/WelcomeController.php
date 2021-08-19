@@ -3,22 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Survey;
+use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
+        $queryUrl = ($request->input('pecahan') !== null) ? $request->input('pecahan') : '1000';
         $pecahan = [
-            1, 2, 3, 4
+            '1000' => 1,
+            '2000' => 2,
+            '5000' => 3,
+            '10000' => 4
         ];
-        $i = 4;
-        if(isset($q)) {
-            foreach ($pecahan as $value) {
-                if ($q == $value) {
-                    $i = $q;
-                }
-            }
-        }
-        $table = $this->count_survey($i);
+        $table = $this->count_survey($pecahan[$queryUrl]);
         return view('welcome')->with('table', $table);
     }
 
