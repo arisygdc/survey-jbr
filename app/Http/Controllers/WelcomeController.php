@@ -8,12 +8,10 @@ use Illuminate\Http\Request;
 class WelcomeController extends Controller
 {
     public function index(Request $request) {
-        $queryUrl = ($request->input('pecahan') !== null) ? $request->input('pecahan') : '1000';
+        $queryUrl = ($request->input('pecahan') == 'upb') ? 'upb' : 'upk';
         $pecahan = [
-            '1000' => 1,
-            '2000' => 2,
-            '5000' => 3,
-            '10000' => 4
+            'upk' => [1, 3],
+            'upb' => [4, 7]
         ];
         $table = $this->count_survey($pecahan[$queryUrl]);
         return view('welcome')->with('table', $table);
@@ -22,7 +20,7 @@ class WelcomeController extends Controller
     protected function count_survey($q) {
         return Survey::selectRaw('kecamatan, count(kecamatan_id) as disurvey, avg(qlt) as kualitas')
                         ->leftJoin('kecamatan', 'kecamatan_id', '=', 'kecamatan.id')
-                        ->where('pecahan_id', $q)
+                        ->whereBetween('pecahan_id', $q)
                         ->groupBy('kecamatan_id')
                         ->get();
     }
