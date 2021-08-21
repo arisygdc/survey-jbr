@@ -87,7 +87,7 @@
               <th scope="row">{{ $loop->iteration }}</th>
               <td>{{ $val->kecamatan }}</td>
               <td>{{ $val->disurvey }}</td>
-              <td>{{ $val->kualitas }}</td>
+              <td>{{ number_format((float)$val->kualitas), '.', '' }}</td>
             </tr>
           @endforeach
             </tr>
